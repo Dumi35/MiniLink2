@@ -21,21 +21,33 @@ mongoose.connect("mongodb://127.0.0.1:27017/testing", {
 })
   .catch((error) => console.log("error in connection"));
 
-//reconnect()
-
 
 const item = require("./models/item"); // Create the Item model
 
+const clientLink = `http://localhost:3000`
+// route to handle loading of original urls
+app.use((req, res) => {
+ 
+  // Check if the requested URL is not home page
+  if (req.url !== '/') {
+    // const items = item.find({ miniLink: req.query.miniLink }).then(result => res.send(result)).catch(error => console.log(error))
+    console.log(clientLink+req.url)
+    const items = item.find({ miniLink: clientLink+req.url}).then(result => {console.log(result);res.send(result)}).catch(error => console.log("error "+error))
+  }
+  
+});
 
 //search URL in db to avoid duplicates
 app.get("/", (req, res) => {
-  // const items = item.find({miniLink:req.query.miniLink}).then(result => console.log("foud "+req.query.miniLink)).catch(error => console.log("couldnt find link "+req.miniLink))
-  const items = item.find({ miniLink: req.query.miniLink }).then(result => res.send(result)).catch(error => console.log("couldnt find link " + req.miniLink))
+  const items = item.find({ miniLink: req.query.miniLink }).then(result => res.send(result)).catch(error => console.log(error))
 })
 
 // Body parsing middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+
+
 
 //sending long URL to db
 app.post("/", (req, res) => {
@@ -44,15 +56,8 @@ app.post("/", (req, res) => {
   items.save().then(console.log("record saved")).catch(err => console.log(err))
 })
 
-// route to handle loading of original urls
-app.use((req, res) => {
-  // Perform actions based on the requested URL
-  if (req.url === '/specific-route') {
-    // Handle specific route
-    res.send('Handling specific route');
-  } else {
-    // Handle other routes
-    res.send('Handling other routes');
-  }
-});
+
+
+
+
 
