@@ -1,43 +1,3 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 
 *{
@@ -53,7 +13,7 @@
 
 body{
   background: var(--dark-clr);
-  padding-block: min(15rem, 21vh);
+  padding-block: min(15rem, 19vh);
   padding-inline: min(30rem, 10vw);
   font-family: "Outfit", sans-serif;
 }
@@ -65,7 +25,7 @@ body{
   align-items: center;
 }
 
-p{
+.p__title, .p__description {
   font-weight: bold;
   text-align: center;
 }
@@ -86,6 +46,11 @@ p{
   font-size: var(--font-md);
 }
 
+.p__error-msg{
+  color: rgb(185, 10, 10);
+  /* display: none; */
+  
+}
 .form{
   width: min(100%, 35rem);
   background: #282828;
@@ -154,4 +119,8 @@ p{
   50%{
     filter: hue-rotate(-180deg);
   }
+}
+
+.hidden {
+  display: none;
 }
