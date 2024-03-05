@@ -25,28 +25,27 @@ mongoose.connect("mongodb://127.0.0.1:27017/testing", {
 const item = require("./models/item"); // Create the Item model
 
 const clientLink = `http://localhost:3000`
+
 // route to handle loading of original urls
 app.use((req, res) => {
  
   // Check if the requested URL is not home page
   if (req.url !== '/') {
     // const items = item.find({ miniLink: req.query.miniLink }).then(result => res.send(result)).catch(error => console.log(error))
-    console.log(clientLink+req.url)
-    const items = item.find({ miniLink: clientLink+req.url}).then(result => {console.log(result);res.send(result)}).catch(error => console.log("error "+error))
+    console.log("client link "+clientLink+req.url)
+    const items = item.find({ miniLink: clientLink+req.url}).then(result => {console.log("use "+result);res.send(result)}).catch(error => console.log("error "+error))
   }
-  
+  //next()
 });
 
 //search URL in db to avoid duplicates
 app.get("/", (req, res) => {
-  const items = item.find({ miniLink: req.query.miniLink }).then(result => res.send(result)).catch(error => console.log(error))
+  const items = item.find({ miniLink: req.query.miniLink }).then(result => {console.log("get " + result);res.send(result)}).catch(error => console.log(error))
 })
 
 // Body parsing middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-
 
 
 //sending long URL to db

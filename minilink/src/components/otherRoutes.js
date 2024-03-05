@@ -13,7 +13,7 @@ function LoadMiniLink() {
 
         axios.get(serverLink+path).then((response) => {
             if(response.data.length !== 0){
-                console.log("response")
+                console.log("response here")
                 console.log(response.data)
                 console.log(response.data[0].longURL)
                 window.location.href=response.data[0].longURL

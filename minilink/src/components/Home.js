@@ -53,14 +53,31 @@ function Home() {
     }).then(response => {
       //link does not exist on db so create document
       if (response.data.length === 0) {
+        document.getElementById("miniLinkField").value=miniLink
         axios.post(`${serverLink}`, {
           longURL,
           miniLink
-        })
+        })//.then(console.log("response "+response.data)).catch(err=>console.log("post error"+err))
       }
+      //create another minilink
+      // else {
+      //   createMiniLink()//test with 123 as random string
+      // }
 
     })
   }, [miniLink]);
+
+  function copyMiniLink() {
+    var copyText = document.getElementById("miniLinkField");
+
+      // Select the text field
+      copyText.select();
+      copyText.setSelectionRange(0, 99999); // For mobile devices
+
+      // Copy the text inside the text field
+      navigator.clipboard.writeText(copyText.value);
+
+  }
 
   return (
 
@@ -94,17 +111,48 @@ function Home() {
             </svg>
             <p>Your mini link</p>
           </label>
-          <input className="form__input form__input--secondary" readOnly></input>
+          <input className="form__input form__input--secondary" readOnly id="miniLinkField"></input>
         </div>
 
         <button className="form__btn" onClick={validateLongURL}>
           Shorten URL
         </button>
 
+        <div className="form__link-action-div">
+          <button className="form__btn form__link-action-btn form__link-action-btn--blue" type="button">
+            <svg width="24" height="25" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7 3.22363H4C3.44772 3.22363 3 3.67135 3 4.22363V7.22363C3 7.77592 3.44772 8.22363 4 8.22363H7C7.55228 8.22363 8 7.77592 8 7.22363V4.22363C8 3.67135 7.55228 3.22363 7 3.22363Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M20 3.22363H17C16.4477 3.22363 16 3.67135 16 4.22363V7.22363C16 7.77592 16.4477 8.22363 17 8.22363H20C20.5523 8.22363 21 7.77592 21 7.22363V4.22363C21 3.67135 20.5523 3.22363 20 3.22363Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M7 16.2236H4C3.44772 16.2236 3 16.6713 3 17.2236V20.2236C3 20.7759 3.44772 21.2236 4 21.2236H7C7.55228 21.2236 8 20.7759 8 20.2236V17.2236C8 16.6713 7.55228 16.2236 7 16.2236Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M21 16.2236H18C17.4696 16.2236 16.9609 16.4343 16.5858 16.8094C16.2107 17.1845 16 17.6932 16 18.2236V21.2236M21 21.2236V21.2336M12 7.22363V10.2236C12 10.7541 11.7893 11.2628 11.4142 11.6378C11.0391 12.0129 10.5304 12.2236 10 12.2236H7M3 12.2236H3.01M12 3.22363H12.01M12 16.2236V16.2336M16 12.2236H17M21 12.2236V12.2336M12 21.2236V20.2236" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            QR
+          </button>
+          <button className="form__btn form__link-action-btn form__link-action-btn--red" type="button" onClick={copyMiniLink} >
+            <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7 9.89063C7 9.1833 7.28099 8.50494 7.78115 8.00478C8.28131 7.50462 8.95967 7.22363 9.667 7.22363H18.333C18.6832 7.22363 19.03 7.29262 19.3536 7.42665C19.6772 7.56068 19.9712 7.75713 20.2189 8.00478C20.4665 8.25243 20.663 8.54644 20.797 8.87002C20.931 9.19359 21 9.5404 21 9.89063V18.5566C21 18.9069 20.931 19.2537 20.797 19.5772C20.663 19.9008 20.4665 20.1948 20.2189 20.4425C19.9712 20.6901 19.6772 20.8866 19.3536 21.0206C19.03 21.1546 18.6832 21.2236 18.333 21.2236H9.667C9.31676 21.2236 8.96996 21.1546 8.64638 21.0206C8.32281 20.8866 8.0288 20.6901 7.78115 20.4425C7.53349 20.1948 7.33704 19.9008 7.20301 19.5772C7.06898 19.2537 7 18.9069 7 18.5566V9.89063Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M4.012 16.9606C3.70534 16.7858 3.45027 16.5331 3.27258 16.2281C3.09488 15.9231 3.00085 15.5766 3 15.2236V5.22363C3 4.12363 3.9 3.22363 5 3.22363H15C15.75 3.22363 16.158 3.60863 16.5 4.22363" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            Copy
+          </button>
+
+        </div>
+        <div className="form__link-action-div">
+          <button className="form__btn">
+            My MiniLinks
+          </button>
+          <button className="form__btn" >
+            Shorten Another
+          </button>
+
+        </div>
+
       </form>
 
     </div>
   )
 }
+
+
 
 export default Home;

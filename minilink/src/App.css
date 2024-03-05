@@ -9,6 +9,7 @@
   --dark-clr: #222;
   --font-lg: clamp(1rem,1.5rem + 0.8vw, 3rem);
   --font-md: 1.1rem;
+  --font-sm: 0.9rem;
 }
 
 body{
@@ -108,11 +109,48 @@ body{
   font-family: "Outfit", sans-serif;
   margin-inline: min(4rem, 14vh); 
   padding-block: 10px;
+  font-size: var(--font-sm);
 }
 
 .form__btn:hover{
   cursor: pointer;
   animation: borderAnimate 4s linear infinite;
+}
+
+.form__link-action-div{
+  display: flex;
+  /* flex-wrap: wrap; */
+  gap: 2rem;
+  align-items: center;
+  justify-content: center;
+}
+.form__link-action-div:last-child .form__btn{
+  margin: 0px;
+  padding-inline: min(2rem, 5vw);
+}
+
+.form__link-action-btn{
+  display: flex;
+  gap: 5px;
+  border-radius: 30px;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  margin: 0px;
+  padding-block: min(0.75rem, 2vw);
+  padding-inline: min(2rem, 5vw);
+}
+
+.form__link-action-btn:hover{
+  animation: none;
+}
+
+.form__link-action-btn--blue{
+  background-color: blue;
+}
+.form__link-action-btn--red{
+  background-color: red;
 }
 
 @keyframes borderAnimate {
@@ -124,3 +162,6 @@ body{
 .hidden {
   display: none;
 }
+
+
+
