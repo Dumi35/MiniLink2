@@ -34,6 +34,9 @@ app.use(express.urlencoded({ extended: true }));
 // Search URL in db to avoid duplicates
 app.get("/", (req, res) => {
   const { miniLink } = req.query;
+  if (miniLink===""){
+    return
+  }
   item.find({ miniLink })
     .then(result => res.send(result))
     .catch(error => console.log(error));
